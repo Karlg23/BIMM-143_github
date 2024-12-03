@@ -1,0 +1,156 @@
+---
+title: "Class 13"
+author: "Karleen Guerrero (16791042)"
+format: html
+---
+
+##Import/Read the data from Himes et. al
+
+```{r}
+counts <- read.csv("class 13.csv", row.names=1)
+meta <- read.csv("class 13..csv", row.names=1)
+```
+
+
+Lets have a wee peak at this data 
+```{r}
+head(metadata)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I need to translate our gene identifiers "ENSG0000..." into genes names that the rest of the world can understand.
+To do this annotation I will use the "AnnotationDBi" package. I can install this with BiocManager::install()'
+
+```{r}
+library(AnnotationDBi)
+library(org.Hs.eg.db)
+
+columns(org.Hs.eg.db)
+```
+I will use the 'mapIds()' function to "Map" my identifiers to those from different databases. will go between "ENSEMBL" and SYMBOL" (and then after "GENENAME")
+
+```{r}
+res$symbol <- mapIds(org.Hs.eg.db, 
+                     keys = rownames(res), 
+                     keytype = "ENSEMBL", 
+                     column = "SYMBOL")
+
+#head(res)
+```
+
+Add "GENENAME"
+```{r}
+res$genename <- mapIds(org.Hs.eg.db, 
+                     keys = rownames(res), 
+                     keytype = "ENSEMBL", 
+                     column = "SYMBOL")
+```
+Add "ENTREZID"
+```{r}
+Res$entrez <- mapIds(org.Hs.eg.db, 
+                     keys = rownames(res), 
+                     keytype = "ENSEMBL", 
+                     column = "ENTREZID")
+```
+
+Save out annotated results object
+```{r}
+write.csv(res, file="results_annotated.csv")
+```
+# Pathway Analysis 
+
+Now that we have out results with added annotation we can do some pathway mapping. 
+Lets use the **gage** package to loo for KEGG pathways in our results (genes of interest)
+
+```{r}
+#| message: false
+library(pathview)
+library(gage)
+library(gageData)
+
+data(kegg.sets.hs)
+
+# Examine the first 2 pathways in this kegg set for humans
+head(kegg.sets.hs, 1)
+```
+
+
+What **gage** wants as inpuut is not my big table/data.frame of results. it just want a "vector of importance"/ For RNAseq data like we have this is out log2FC values...
+
+```{r}
+x <- c(10, 20, 100)
+names(x) <- c(barry)
+```
+
+
+```{r}
+foldchanges = res$log2FoldChange
+names(foldchanges) = res$entrez
+head(foldchanges)
+```
+
+Now, lets run the gage pathway analysis. 
+```{r}
+# Get the results
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+```
+
+What is in this kgreggs? 
+
+
+```{r}
+
+```
+
+```{r}
+head(keggres$less, 3)
+```
+
+Let's use the pathview package to look at one of these highlighted KEGG pathways with out genes highlighted. "hsa05310 Asthma"
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa05310")
+```
+
+
+
+```{r}
+! [Asthma Pathway with my DEGs](hsa05310.pathway.png)
+```
+
