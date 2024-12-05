@@ -1,8 +1,14 @@
+![logo](https://bioboot.github.io/bimm143_F24/assets/img/logo.png)
+
 # BIMM-143_github
 Classwork for [BIMM143] (https://bioboot.github.io/bimm143_F24/schedule/#19) F24 at UC San Diegoo.
+
 Class 1 [Key Databases and Online Resources](https://github.com/Karlg23/BIMM-143_github/tree/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%201)
+
 Class 2 [Alignment and Database Searching](https://github.com/Karlg23/BIMM-143_github/tree/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%202)
+
 Class 3 [Advanced Database Searching](https://github.com/Karlg23/BIMM-143_github/tree/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%203%20)
+
 Class 4 [R script to PDF](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%204/lab%204.pdf) 
 Class 5 [ggplot RMD Submission](https://github.com/Karlg23/BIMM-143_github/tree/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%205.)
 Class 6 [R Functions](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%206/Class%206.pdf)
