@@ -1,7 +1,7 @@
 ---
 title: "Class 13"
 author: "Karleen Guerrero (16791042)"
-format: html
+format: gfm
 ---
 
 ##Import/Read the data from Himes et. al
