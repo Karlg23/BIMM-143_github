@@ -17,19 +17,19 @@ Class 6 [R Functions](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d
 
 Class 7 [Machine Learning 1](https://github.com/Karlg23/BIMM-143_github/tree/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%207)
 
-Class 8 [ML mini project ](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%208%20MIni%20Project/Class-8-Mini-Project.pdf)
+Class 8 [**ML mini project**](https://github.com/Karlg23/BIMM-143_github/blob/main/Class%208%20MIni%20Project/Class%208%20Mini%20Project.md)
 
-Class 9 [Structural Bioinformatics]()
+Class 9 [Structural Bioinformatics](https://github.com/Karlg23/BIMM-143_github/blob/c45ec724d67b6f4a5e86318fa0fbd31122a349b9/Class%209../Class%209.pdf)
 
-Class 10 [Holloween Lab](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%2010%20Halloween%20Lab/Class%2010%20Halloween%20Lab%20-%20Class-10-Halloween-Lab.pdf)
+Class 10 [**Holloween Lab**](https://github.com/Karlg23/BIMM-143_github/blob/main/Class%2010%20Halloween%20Lab/Class%2010%20Halloween%20Lab.md)
 
 Class 11 [Alpha Fold](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%2011%20/Class-9-Structural-BioInformatics-1.pdf)
 
-Class 12 [RNA Seqy Galaxy](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/class12%20point/class12-point.pdf)
+Class 12 [**RNA Seqy Galaxy**](https://github.com/Karlg23/BIMM-143_github/blob/main/class12%20point/class12%20point.md)
 
 Class 13 [DEseq](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%2013/Class%2013%20-%20Class-13.pdf)
 
-Class 14 [DEseq2](https://github.com/Karlg23/BIMM-143_github/blob/af5f9fba8d003ad8366014e4fc27c1d70a4a9dab/Class%2014/Class%2014.pdf)
+Class 14 [**DEseq2**](https://github.com/Karlg23/BIMM-143_github/blob/main/Class%2014/class_14.md)
 
 Class 15 [Pertussis resurgence mini-project]()
 
