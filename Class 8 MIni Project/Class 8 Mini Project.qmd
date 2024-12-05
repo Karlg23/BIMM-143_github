@@ -1,7 +1,8 @@
 ---
 title: "Class 8 Mini project"
 author: "Karleen Guerrero (A16791042)"
-format: pdf
+format: gfm
+
 ---
 
 It is important to consider scalling your data before anakysis such as PCA

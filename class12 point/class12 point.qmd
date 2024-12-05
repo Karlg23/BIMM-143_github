@@ -1,7 +1,7 @@
 ---
 title: "class 12 point"
 author: "Karleen Guerrero (A16791042"
-format: pdf
+format: gfm
 ---
 
 > Q13. Read this file into R and determine the sample size for each genotype and their

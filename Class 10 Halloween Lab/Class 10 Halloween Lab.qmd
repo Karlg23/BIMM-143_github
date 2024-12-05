@@ -1,7 +1,7 @@
 ---
 title: "Class 10 Halloween Lab"
 author: "Karleen Guerrero (A16791042)"
-format: pdf
+format: gfm
 ---
 
 
