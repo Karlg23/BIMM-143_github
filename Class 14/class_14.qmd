@@ -1,6 +1,6 @@
 ---
 title: "Class 14 Lab"
-author: "Gonzalez A16745338"
+author: "Guerrero A16791042"
 format: pdf
 ---
 
