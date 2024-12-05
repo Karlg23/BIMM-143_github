@@ -1,0 +1,350 @@
+---
+title: "Class 8 Mini project"
+author: "Karleen Guerrero (A16791042)"
+format: pdf
+---
+
+It is important to consider scalling your data before anakysis such as PCA
+
+For example: 
+```{r}
+colMeans(mtcars)
+```
+
+
+```{r}
+apply(mtcars, 2, sd)
+```
+
+
+```{r}
+x<- scale(mtcars)
+head(x)
+```
+
+
+```{r}
+round(colMeans(x), 2)
+```
+
+
+Key point: It is usually always a good idea to scale your data before to PCA
+
+## Breast Cancer Biopsy Analysis 
+
+
+```{r}
+# Save your input data file into your Project directory
+fna.data <- "WisconsinCancer.csv"
+
+# Complete the following code to input the data and store as wisc.df
+wisc.df <- read.csv(fna.data, row.names=1) 
+
+
+head(wisc.df)
+```
+
+```{r}
+diagnosis <- wisc.df[,1]
+table (diagnosis)
+```
+
+
+Remove this first 'diagnosis' column from the data set as I dont want to pass this to PCA etc. It is essentially the expert "answer" that we will compare our analysis result to
+
+```{r}
+# We can use -1 here to remove the first column
+wisc.data <- wisc.df[,-1]
+head(wisc.data) 
+
+```
+ # Create diagnosis vector for later
+```{r}
+diagnosis <- as.factor(wisc.df$diagnosis)
+
+```
+
+
+## Explanatory data Analysis 
+>Q1. How many observations are in this dataset?
+
+```{r}
+# Count the number of observations in the dataset
+num_observations <- nrow(wisc.df)
+num_observations
+```
+
+
+>Q2. How many of the observations have a malignant diagnosis?
+
+```{r}
+# Count the number of malignant diagnosis
+num_malignant <- sum(diagnosis =="M")
+num_malignant 
+```
+
+>Q3. How many variables/features in the data are suffixed with _mean?
+
+```{r}
+colnames(wisc.data)
+```
+
+
+```{r}
+length(grep("_mean", colnames(wisc.data)))
+```
+
+
+
+
+
+## Principle Component Analysis 
+```{r}
+wisc.pr <- prcomp( wisc.data, scale= T )
+summary(wisc.pr)
+
+```
+
+Main "PC score plot", "PC1 vs PC2 plot"
+
+See what is in our PCA result object:
+
+```{r}
+attributes(wisc.pr)
+```
+
+```{r}
+head(wisc.pr$x)
+```
+
+
+```{r}
+plot(wisc.pr$x[,1], wisc.pr$x[,2], 
+     col=as.factor(diagnosis))
+
+```
+
+> Q4. From your results, what proportion of the original variance is captured by the first principal components (PC1)?
+
+```{r}
+# Perform PCA on the data (assuming wisc.data is already prepared)
+pca_result <- prcomp(wisc.data, scale. = TRUE)
+
+# Calculate the proportion of variance captured by PC1
+proportion_pc1 <- (pca_result$sdev[1]^2/sum(pca_result$sdev^2))
+
+# Print the proportion
+proportion_pc1
+```
+
+> Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data?
+
+```{r}
+# Perform PCA and calculate the number of PCs needed to explain at least 70% of the variance
+num_pcs_70 <- which(cumsum((pca_result <- prcomp(wisc.data, scale. = TRUE))$sdev^2 / sum(pca_result$sdev^2)) >= 0.70)[1]
+
+# Print the number of PCs required
+num_pcs_70
+```
+
+> Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data?
+
+```{r}
+# Perform PCA and calculate the number of PCs needed to explain at least 90% of the variance
+num_pcs_90 <- which(cumsum((pca_result <- prcomp(wisc.data, scale. = TRUE))$sdev^2 / sum(pca_result$sdev^2)) >= 0.90)[1]
+
+# Print the number of PCs required
+num_pcs_90
+```
+
+```{r}
+x <- summary(wisc.pr)
+plot(x$importance[2,], type="b")
+```
+
+
+
+>Q7. What stands out to you about this plot? Is it easy or difficult to understand? Why?
+
+```{r}
+
+pca_result <- prcomp(wisc.data,scale. = TRUE)
+biplot(pca_result)
+
+```
+ # The overlapping in the plot stands out. 
+ # It can be difficult to interpret due to no visible relationionship. 
+ 
+ 
+ # Scatter plot observations by components 1 and 2
+
+```{r}
+plot( pca_result$x[, 1], pca_result$x[, 2], col = diagnosis ,
+     xlab = "PC1", ylab = "PC2")
+```
+
+
+
+>Q8. Generate a similar plot for principal components 1 and 3. What do you notice about these plots?
+
+```{r}
+plot(wisc.pr$x[, 1 ], wisc.pr$x[,3], col = diagnosis,
+     xlab = "PC1", ylab = "PC3")
+```
+
+
+```{r}
+# Create a data.frame for ggplot
+df <- as.data.frame(wisc.pr$x)
+df$diagnosis <- diagnosis
+# Load the ggplot2 package
+library(ggplot2)
+# Make a scatter plot colored by diagnosis
+ggplot(df) +
+  aes(PC1, PC2, col=diagnosis) +
+  geom_point() +
+  labs(title = "PCA Scatter Plot of PC1 vs PC2",
+       x = "PC1",
+       y = "PC2")
+```
+
+```{r}
+ # Calculate variance of each component
+pr.var <- wisc.pr$sdev^2
+head(pr.var)
+```
+
+
+```{r}
+# Variance explained by each principal component: pve
+pve <- pca_result$sdev^2 / sum(pca_result$sdev^2)
+# Plot variance explained for each principal component
+plot(pve, xlab = "Principal Component",
+     ylab = "Proportion of Variance Explained",
+     ylim = c(0, 1), type = "o")
+```
+
+
+>Q9. For the first principal component, what is the component of the loading vector (i.e. wisc.pr$rotation[,1]) for the feature concave.points_mean?
+
+```{r}
+ # Assuming pca_result is the result of the PCA
+loading_concave_points_mean <- pca_result$rotation["concave.points_mean", 1]
+loading_concave_points_mean
+```
+
+
+
+>Q10. What is the minimum number of principal components required to explain 80% of the variance of the data?
+
+```{r}
+# Calculate the proportion of variance
+pve <- pca_result$sdev^2 / sum(pca_result$sdev^2)
+# Calculate cumulative variance
+cumulative_variance <- cumsum(pve)
+# at least 80% of the variance
+num_pcs_80 <- which(cumulative_variance >= 0.80)[1]
+num_pcs_80
+```
+
+## Hierarchical Clustering 
+
+
+```{r}
+# Scale the wisc.data data using the "scale()" function
+data.scaled <- scale(wisc.data)
+data.dist <- dist(data.scaled)
+wisc.hclust <- hclust(data.dist, method = "complete")
+```
+
+
+
+
+> Q11. Using the plot() and abline() functions, what is the height at which the clustering model has 4 clusters?
+
+
+```{r}
+d <- dist(scale(wisc.data))
+hc.raw <- hclust(d)
+plot(hc.raw)
+```
+
+
+## Combine PCA and Clistering
+
+Our PCA results were in ‘wisc.pr’
+
+```{r}
+#distance matrix from PCA result 
+d <- dist(wisc.pr$x[,1:3])
+hc <- hclust(d, method= "ward.D2")
+plot(hc)
+```
+
+```{r}
+grps <- cutree(hc, k=2)
+```
+
+
+Cute tree into two groups 
+
+```{r}
+plot(wisc.pr$x, col=grps)
+```
+
+
+
+```{r}
+wisc.hclust.clusters <- cutree(wisc.hclust, k=4)
+table(wisc.hclust.clusters, diagnosis)
+```
+
+
+```{r}
+table(diagnosis, grps)
+```
+
+
+```{r}
+table(grps)
+```
+
+
+
+> Q12. Can you find a better cluster vs diagnoses match by cutting into a different number of clusters between 2 and 10?
+
+```{r}
+# Initialize results list
+results <- lapply(2:10, function(k) {
+  clusters <- cutree(wisc.hclust, k)
+  table_clusters <- table(clusters, diagnosis)
+  accuracy <- sum(apply(table_clusters, 1, max)) / nrow(wisc.data)
+  list(clusters = clusters, table = table_clusters, accuracy = accuracy)
+})
+# Name the results list by cluster count
+names(results) <- 2:10
+results
+```
+
+
+
+
+> Q13. Which method gives your favorite results for the same data.dist dataset? Explain your reasoning.
+
+
+# ward.d2 method reduces cluster variance and allows for more clarity within clusters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
